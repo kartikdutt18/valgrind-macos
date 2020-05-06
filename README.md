@@ -4,39 +4,38 @@ This repository contains a version of Valgrind including a few patches to improv
 
 ## Status
 
-Valgrind now builds and works on every macOS version
+Valgrind now builds and works on every macOS version.
 
 Note that some features are still in progress:
 
  - crash when using wqthread (used in certain UI frameworks)
- - using threads and signals is undefined
 
 It is currently tested on 10.14.6 and 10.15.4.
 
 ## Usage
 
-In order to use this version, use the following command:
+In order to use this version of `valgrind`, use the following commands:
+
+```
+brew tap LouisBrunner/valgrind
+brew install --HEAD LouisBrunner/valgrind/valgrind
+```
+
+You can now use `valgrind` as normal, including `brew upgrade valgrind`, `brew upgrade`, etc.
+
+Note that you might need to uninstall the upstream version of `valgrind` first (`brew remove valgrind`).
+
+### Deprecated method
+
+You can directly refer to the formula in this repository using:
 
 ```
 brew install --HEAD https://raw.githubusercontent.com/LouisBrunner/valgrind-macos/master/valgrind.rb
 ```
 
-In case you already have Valgrind installed, you will need to either `unlink` it first or `reinstall` it.
-
-## TODO
-
- - Get historical build data from sourceforge for macOS 10.13
- - wqthread broken (see #4) [patch in progress]
- - drd thread related crash on 10.15
- - `-UNHANDLED` messages
- - Run regtest in parallel [patch in progess]
+However, do note that it might conflict with an existing version of `valgrind` and that it will break after a `brew upgrade`.
 
 ## Tests
-
-Some tests are blocking and were therefore disabled on macOS:
-
- - `none/tests/pselect_alarm`
- - `none/tests/pth_term_signal`
 
 ### Linux (Ubuntu 18.04)
 
@@ -398,6 +397,7 @@ none/tests/pth_cancel2                   (stderr)
 none/tests/require-text-symbol-2         (stderr)
 none/tests/rlimit_nofile                 (stderr)
 none/tests/scripts/shell                 (stderr)
+none/tests/sem                           (stderr) // non-deterministic
 none/tests/syscall-restart1              (stderr)
 none/tests/syslog                        (stderr)
 ```
