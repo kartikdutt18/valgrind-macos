@@ -28,3 +28,13 @@
    fun:_ZN16ImageLoaderMachO18validateFirstPagesEPK21linkedit_data_commandiPKhmxRKN11ImageLoader11LinkContextE
    ...
 }
+
+{
+   OSX1015:dyld-4
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc_zone_?alloc
+   ...
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoEbb
+   ...
+}
